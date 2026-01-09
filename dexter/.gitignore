@@ -1,0 +1,39 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Logs
+*.log
+logs/*.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Services (if contains sensitive data)
+services/.env
+services/*.key
+services/*.secret
+
+# Archive (optional - decide if you want to track)
+# archive/
