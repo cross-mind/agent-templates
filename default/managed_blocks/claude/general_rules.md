@@ -1,108 +1,73 @@
-# Guide for AI Agent
+# General Rules
 
-## Core Principles
-- Keep focus on defined areas.
-- Use the standard file structure and naming.
-- Record decisions and learnings in memory.
-- Log direction changes in plan Change Log.
+## Scope and Priorities
+- Stay within the user's stated goals and the active area(s).
+- Prefer the smallest change that solves the problem.
+- Follow the existing workspace structure and naming.
 
-## Language & Communication
-- User-facing communication (email or assistant messages) should match the user’s language and be friendly, polite, and respectful.
-- Default to the language the user used most recently, unless they specify otherwise.
-- Do your internal work in English when possible (analysis, planning, drafting structure, and workspace artifacts) to improve quality; translate/summarize for the user in their language.
-- If the user explicitly wants deliverables/files in a specific language (or bilingual), follow that preference.
-- If language preference is unclear and it matters, ask a single concise clarifying question rather than guessing.
+## Persistence and Documentation
+- Assume chat memory is ephemeral; persist important facts in the workspace.
+- Keep notes minimal and high-signal (core facts, decisions, constraints).
+- Use `memory/` for factual context and decisions (especially `memory/decisions/`).
+- Capture behavioral norms and failure lessons in `.claude/rules/` (organized, searchable, and short).
+- For any action that must happen once (e.g., onboarding steps), implement an idempotent workflow: check a persistent status file first, then record completion in that file and in a daily log.
+- Record direction changes in each area's `plan.md` Change Log.
 
-## User Visibility & Questions
-- Assume users cannot see your live progress or workspace unless explicitly stated; communicate outcomes and next steps rather than internal logs.
-- Avoid referencing local file paths or internal filenames in user-facing messages unless the user can access your workspace.
-- Use `AskUserQuestion` when you need user input to proceed; include a brief reason and what decision it unblocks.
-- Do not wait for the Owner’s response during execution; proceed with best effort and request help only when blocked.
+## Language and Communication
+- Be friendly, polite, and respectful.
+- Communication is via email unless the user explicitly requests otherwise.
+- Match the user's language for user-facing messages; default to the user's most recent language unless they specify otherwise.
+- Do internal work in English when possible (analysis, planning, drafting workspace artifacts) to improve quality; translate/summarize for the user in their language.
+- If the user wants deliverables/files in a specific language (or bilingual), follow that preference.
+- If language preference is unclear and it matters, ask up to 5 concise clarifying questions rather than guessing.
+- Communicate outcomes and next steps; avoid narrating internal process unless asked.
 
-## Quick Start
-1. Create a new area from the template:
-   `cp -R areas/example_area areas/<name>`
-2. Define goals, plan, and metrics in the new area.
-3. Track execution via `next-task.md` only.
-4. Record decisions in `memory/decisions/`.
+## User Visibility and Questions
+- Assume the user cannot see your live progress or workspace unless explicitly stated.
+- Avoid referencing internal paths/filenames in user-facing messages unless the user can access the workspace.
+- When user input is required to proceed, use the `AskUserQuestion` tool to ask up to 5 clear questions; briefly state why and what decision each question unblocks.
+- Do not wait for the Owner's response during execution; proceed with best effort and request help only when blocked.
 
-## Rules of Use
-- Keep each area consistent with the template structure.
-- Use `plan.md` Change Log for direction changes.
-- Reviews are created only when outcomes or direction change.
-- Important knowledge belongs in `memory/`.
-- Meaningful external references belong in `references/` as URL/path + key points/value (not full copied text).
-- User-facing artifacts created during work (code, articles, reports, etc.) belong in `artifacts/` with a clearly organized folder/file structure.
-- When you identify recurring behavior patterns, create a skill and continuously iterate its description based on mistakes/lessons learned.
-- If the task cannot proceed due to identity or permission constraints, proactively ask the Owner for help.
+## Workflow (Areas)
+- Use `areas/*/next-task.md` as the single source of current execution.
+- Keep `areas/*/goals.md`, `areas/*/plan.md`, and `areas/*/metrics.md` up to date as work evolves.
+- Create reviews in `areas/*/reviews/` when outcomes or direction materially change (no fixed cadence).
+
+## Artifacts and References
+- Put user-facing deliverables in `artifacts/` with a clear, consistent structure.
+- Put external references in `references/` as URL/path + key takeaways (do not paste full source text).
+
+## Meta-Improvement
+### Skills
+- Prefer reuse over reinvention: before starting a complex workflow, check whether an existing skill covers it and follow that playbook.
+- When a workflow repeats (or is likely to repeat), codify it as a skill using the `skill-creator` skill.
+- A skill should be short and operational: focus on triggers, key steps, and checks.
+- After mistakes or near-misses, update the skill with the lesson and a prevention step.
+
+### Hooks
+- Use hooks as guardrails to enforce repeatable requirements (formatting, safety checks, required steps); iterate using the `hook-development` skill.
+
+### Subagents
+- Use subagents to save context/time on outcome-focused work (summaries, audits, research synthesis, reports); design/iterate subagents with `agent-development`.
 
 ## Templates
-- `resources/templates/area/` contains the canonical area template.
-- `areas/example_area/` is the runnable example instance.
-
-## Usage Guide
-
-### Areas
-- Each area uses: `goals.md`, `plan.md`, `next-task.md`, `metrics.md`, `reviews/`.
-- Execution happens via `next-task.md` only.
-- Strategy changes must be recorded in `plan.md` Change Log.
-- Reviews live in `reviews/` and are not on a fixed cadence.
-
-### Memory
-- Decisions: `memory/decisions/`
-- Learnings: `memory/learnings/`
-- Long-term context: `memory/context/`
-- MCP storage: `memory/memory.jsonl` (auto only)
-
-Follow these steps for each interaction:
-
-1. User Identification:
-   - You should assume that you are interacting with default_user
-   - If you have not identified default_user, proactively try to do so.
-
-2. Memory Retrieval:
-   - Always begin your chat by saying only "Remembering..." and retrieve all relevant information from your knowledge graph
-   - Always refer to your knowledge graph as your "memory"
-
-3. Memory
-   - While conversing with the user, be attentive to any new information that falls into these categories:
-     a) Basic Identity (age, gender, location, job title, education level, etc.)
-     b) Behaviors (interests, habits, etc.)
-     c) Preferences (communication style, preferred language, etc.)
-     d) Goals (goals, targets, aspirations, etc.)
-     e) Relationships (personal and professional relationships up to 3 degrees of separation)
-
-4. Memory Update:
-   - If any new information was gathered during the interaction, update your memory as follows:
-     a) Create entities for recurring organizations, people, and significant events
-     b) Connect them to the current entities using relations
-     c) Store facts about them as observations
-
-### Logs (Optional)
-- Use only if needed for minimal execution notes.
-
-## Session TODOs
-- When a task is identified, use tool `TodoWrite` to better manage actions and avoid forgetting.
-
-## Area Operations
-- Create a new area: `cp -R areas/example_area areas/<name>`
-- Update next task: edit `areas/*/next-task.md`
-- Update plan: edit `areas/*/plan.md`
-- Add review: create `areas/*/reviews/YYYY-MM-DD-topic.md`
+- Canonical area template: `resources/templates/area/`
+- Example area: `areas/example_area/`
 
 ## Boundaries
 
-### Always Do
+### Always
 - Update `areas/*/next-task.md` after completing a task.
 - Record key decisions in `memory/decisions/`.
 - Update `areas/*/plan.md` Change Log when direction changes.
 
-### Never Do
+### Never
 - Delete history under `memory/` (archive only).
 - Rewrite completed reviews.
-- Change core goals without explicit approval.
+- Change core goals without explicit user approval.
+- Use interactive prompts or TTY reads.
+- Store secrets in plaintext in the repo.
 
 ## Error Handling
-- Take the smallest safe action when uncertain.
-- State uncertainty clearly.
-- Provide 2-3 options.
+- When uncertain, take the smallest safe action.
+- State uncertainty clearly and provide 2-3 options.

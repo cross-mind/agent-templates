@@ -189,7 +189,7 @@ def sync_skills(
     for skill_dir in sorted(p for p in source_skills_root.iterdir() if p.is_dir()):
         skill_name = skill_dir.name
         target_skill_dir = target_skills_root / skill_name
-        if not target_skill_dir.exists():
+        if cfg.skills_mode == "update_if_exists" and not target_skill_dir.exists():
             continue
 
         for src_file in skill_dir.rglob("*"):

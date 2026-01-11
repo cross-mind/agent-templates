@@ -33,7 +33,7 @@ managed_blocks:
 
 skills:
   root: .claude/skills
-  mode: update_if_exists
+  mode: sync_all
 
 ignore:
   patterns:

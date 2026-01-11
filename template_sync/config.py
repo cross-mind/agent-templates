@@ -29,7 +29,7 @@ class TemplateSyncConfig:
     managed_blocks: tuple[ManagedBlock, ...]
 
     skills_root: Path
-    skills_mode: Literal["update_if_exists", "disabled"]
+    skills_mode: Literal["sync_all", "update_if_exists", "disabled"]
 
     ignore_patterns: tuple[str, ...]
 
@@ -83,8 +83,8 @@ def load_config(config_path: Path, *, repo_root: Path) -> TemplateSyncConfig:
     skills = _require_dict(raw.get("skills", {}), path="skills")
     skills_root = Path(str(skills.get("root", ".claude/skills")))
     skills_mode = str(skills.get("mode", "update_if_exists"))
-    if skills_mode not in ("update_if_exists", "disabled"):
-        raise ValueError("skills.mode must be 'update_if_exists' or 'disabled'")
+    if skills_mode not in ("sync_all", "update_if_exists", "disabled"):
+        raise ValueError("skills.mode must be 'sync_all', 'update_if_exists', or 'disabled'")
 
     ignore = _require_dict(raw.get("ignore", {}), path="ignore")
     ignore_patterns = tuple(str(x) for x in _require_list(ignore.get("patterns"), path="ignore.patterns"))
