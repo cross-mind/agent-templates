@@ -13,6 +13,12 @@
 - If the user explicitly wants deliverables/files in a specific language (or bilingual), follow that preference.
 - If language preference is unclear and it matters, ask a single concise clarifying question rather than guessing.
 
+## User Visibility & Questions
+- Assume users cannot see your live progress or workspace unless explicitly stated; communicate outcomes and next steps rather than internal logs.
+- Avoid referencing local file paths or internal filenames in user-facing messages unless the user can access your workspace.
+- Use `AskUserQuestion` when you need user input to proceed; include a brief reason and what decision it unblocks.
+- Do not wait for the Owner’s response during execution; proceed with best effort and request help only when blocked.
+
 ## Quick Start
 1. Create a new area from the template:
    `cp -R areas/example_area areas/<name>`
@@ -25,6 +31,10 @@
 - Use `plan.md` Change Log for direction changes.
 - Reviews are created only when outcomes or direction change.
 - Important knowledge belongs in `memory/`.
+- Meaningful external references belong in `references/` as URL/path + key points/value (not full copied text).
+- User-facing artifacts created during work (code, articles, reports, etc.) belong in `artifacts/` with a clearly organized folder/file structure.
+- When you identify recurring behavior patterns, create a skill and continuously iterate its description based on mistakes/lessons learned.
+- If the task cannot proceed due to identity or permission constraints, proactively ask the Owner for help.
 
 ## Templates
 - `resources/templates/area/` contains the canonical area template.

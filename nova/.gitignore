@@ -35,5 +35,9 @@ services/.env
 services/*.key
 services/*.secret
 
+# Credentials (local only)
+resources/credentials/*
+!resources/credentials/README.md
+
 # Archive (optional - decide if you want to track)
 # archive/

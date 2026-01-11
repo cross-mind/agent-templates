@@ -148,7 +148,7 @@ sync:
     - .gitignore
     - areas/**
     - resources/templates/**
-    - resources/templates/daily-log.md
+    - daily_logs/YYYY-MM-DD.md
     - README.md
   never_update:
     - IDENTITY.md

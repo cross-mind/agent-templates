@@ -15,6 +15,9 @@ sync:
     - .gitignore
     - README.md
     - areas/**
+    - daily_logs/**
+    - resources/credentials/**
+    - resources/scripts/**
     - resources/templates/**
     - memory/memory.jsonl
   never_update:
