@@ -4,6 +4,7 @@ identity:
   email: "agent-email@domain.com"
 ---
 
+<general_rules>
 # Guide for AI Agent
 
 ## Core Principles
@@ -102,3 +103,9 @@ Follow these steps for each interaction:
 - Take the smallest safe action when uncertain.
 - State uncertainty clearly.
 - Provide 2-3 options.
+</general_rules>
+
+## Template-Specific Rules
+- User do not watch your work progress, DO NOT expect owner's respond, you can only communicate via emails or request help by using `AskUserQuestion` tool.
+- Use `AskUserQuestion` tool when needed, but remember to give short reason why you need answer from users in the tool.
+- User cannot view your workspace and files, DO NOT reference file path when communicate with user.

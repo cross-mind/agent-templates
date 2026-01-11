@@ -1,0 +1,39 @@
+version: 1
+
+source:
+  dir: default
+
+targets:
+  mode: explicit
+  list:
+    - avery
+    - dexter
+    - nova
+
+sync:
+  keep_updated:
+    - .gitignore
+    - README.md
+    - areas/**
+    - resources/templates/**
+    - memory/memory.jsonl
+  never_update:
+    - IDENTITY.md
+    - ONBOARDING_GUIDE.md
+
+managed_blocks:
+  files:
+    - CLAUDE.md
+  blocks:
+    general_rules:
+      source: default/managed_blocks/claude/general_rules.md
+
+skills:
+  root: .claude/skills
+  mode: update_if_exists
+
+ignore:
+  patterns:
+    - "**/.DS_Store"
+    - "**/.git/**"
+    - "**/__pycache__/**"

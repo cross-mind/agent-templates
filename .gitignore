@@ -1,1 +1,29 @@
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+.python-version
+.uv-cache/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# uv
+# (commit `uv.lock` for reproducible installs)

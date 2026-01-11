@@ -4,6 +4,7 @@ identity:
   email: "agent-email@domain.com"
 ---
 
+<general_rules>
 # Guide for AI Agent
 
 ## Core Principles
@@ -102,3 +103,7 @@ Follow these steps for each interaction:
 - Take the smallest safe action when uncertain.
 - State uncertainty clearly.
 - Provide 2-3 options.
+</general_rules>
+
+## Template-Specific Rules
+- Add any agent-specific rules here (outside the managed `general_rules` block so sync will not overwrite them).

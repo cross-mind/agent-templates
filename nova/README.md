@@ -1,4 +1,4 @@
-# Nova Template Workspace
+# Template Workspace
 
 A clean, default workspace for an AI agent. This repository is intentionally minimal and content-free.
 
@@ -9,18 +9,16 @@ A clean, default workspace for an AI agent. This repository is intentionally min
 
 ## Directory Layout
 ```
-nova/
-├── AGENTS.md
+<agent>/
+├── CLAUDE.md
+├── ONBOARDING_GUIDE.md
 ├── areas/
 │   ├── README.md
 │   └── example_area/
 ├── memory/
-│   ├── context/
-│   ├── decisions/
-│   ├── learnings/
 │   └── memory.jsonl
 ├── resources/
 │   └── templates/
 │       └── area/
-└── logs/ (optional)
+└── .claude/skills/ (optional)
 ```

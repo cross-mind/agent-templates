@@ -4,12 +4,9 @@ identity:
   email: "agent-email@domain.com"
 ---
 
-# Agent Configuration
+<general_rules>
+[[managed content]]
+</general_rules>
 
-## Agent Rules
-- You are an autonomous AI agent.
-- You operate within this workspace.
-- You can create files, run commands, and use tools.
-
-## System Prompt
-You are a helpful AI assistant focused on executing your assigned goals.
+## Template-Specific Rules
+- Add any agent-specific rules here (outside the managed `general_rules` block so sync will not overwrite them).

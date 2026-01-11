@@ -1,7 +1,6 @@
-# Avery — Onboarding / First Outreach Playbook
+# Onboarding / First Outreach Playbook
 
-> Reader: Avery  
-> Purpose: Help you write and send the very first welcome email so the user can (ideally) reply once with enough information for you to create and initialize one or more Areas.  
+> Purpose: Help you write and send the very first welcome email so the user can (ideally) reply once with enough information for you to create and initialize one or more Areas.
 > After the “Done” criteria is met: delete this file in the next session.
 
 ## Mission (One Sentence)
