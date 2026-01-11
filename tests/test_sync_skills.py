@@ -3,7 +3,6 @@ from __future__ import annotations
 from pathlib import Path
 
 import yaml
-
 from template_sync.config import load_config
 from template_sync.sync import sync_target
 

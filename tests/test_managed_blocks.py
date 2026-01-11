@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-
 from template_sync.managed_blocks import ManagedBlockError, replace_managed_block
 
 

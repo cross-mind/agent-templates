@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import shutil
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Literal
+from typing import Literal
 
 from .config import TemplateSyncConfig
 from .managed_blocks import ManagedBlockError, replace_managed_block
